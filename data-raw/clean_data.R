@@ -46,7 +46,23 @@ cleaned_data <- raw_data |>
         "Övrig service"
       )
     ),
-    across(where(is.numeric), \(x) if_else(x < 0, NA, x))
+    across(where(is.numeric), \(x) if_else(x < 0, NA, x)),
+    across(
+      c(justice, perceived_org_support),
+      \(x) (x - 1) / 6
+    ),
+    across(
+      c(
+        quant_dem,
+        emo_dem,
+        role_con,
+        possibilities_for_development,
+        social_support_from_collegues,
+        role_clarity,
+        turnouver
+      ),
+      \(x) (x - 1) / 4
+    )
   )
 
 final_data <- cleaned_data |>
